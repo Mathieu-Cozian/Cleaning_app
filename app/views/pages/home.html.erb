@@ -1,2 +1,12 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<%Client.all.each do |client| %>
+  <div class="mb-2">
+  <%= client.user.first_name %>
+  <%= client.user.last_name %>
+  <%= client.user.email %>
+
+  </div>
+<% end %>
+

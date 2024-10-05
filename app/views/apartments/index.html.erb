@@ -1,0 +1,27 @@
+
+
+<div class="container">
+  <div class="flex">
+    <h1>List of apartments</h1>
+    <button class="btn-action"><%= link_to "Add", new_apartment_path%></button>
+  </div>
+
+  <div data-controller="search-client">
+    <button data-controller="search-client" data-action="click->search-client#connect" class="btn btn-primary">Click here</button>
+  </div>
+
+  <div class="container-cards">
+    <% @apartments.each do |apartment| %>
+      <div class="card card-apartment" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Appartement N°<%= apartment.id %></h5>
+          <p class="card-subtitle mb-2 text-muted">Address :<%= apartment.address %></p>
+          <p class="card-text">Price per cleaning: <%= apartment.price_per_cleaning %></p>
+          <p class="card-text">Square meters: <%= apartment.sqm %></p>
+          <p class="card-text">Number of rooms: <%= apartment.number_of_rooms %></p>
+          <%= link_to "Show", apartment_path(apartment)%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

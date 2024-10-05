@@ -1,0 +1,53 @@
+<h1>Create a New Apartment</h1>
+<div class="container">
+
+  <%= form_with(model: @apartment, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :address %>
+      <%= form.text_field :address, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :address_url %>
+      <%= form.text_field :address_url, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :price_per_cleaning %>
+      <%= form.number_field :price_per_cleaning, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :sqm %>
+      <%= form.number_field :sqm, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :number_of_rooms %>
+      <%= form.number_field :number_of_rooms, class: "form-control" %>
+    </div>
+
+
+<!--    SELECTION OF THE CLIENT FOR THE APARTMENT-->
+   <div class="form-group" data-controller="search-client">
+         <input type="text"
+            placeholder="Search for a client..."
+
+                data-action="input->search-client#search"
+                data-search-client-target="input"
+                class="form-control"
+         >
+        <%= form.hidden_field :user_id, id: "client-id", class: 'hidden-client-id' %>
+     <div id="search-client-results" data-search-client-target="results"></div>
+
+   </div>
+
+
+    <%= form.submit "Create Apartment", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,24 @@
+<h1>Create a New Client</h1>
+
+<%= simple_form_for(@client) do |f| %>
+
+  <!-- Nested User fields -->
+  <%= f.simple_fields_for :user do |user_form| %>
+    <div class="field">
+      <%= user_form.input :email, required: true %>
+    </div>
+    <div class="field">
+      <%= user_form.input :password, required: true %>
+    </div>
+    <div class="field">
+      <%= user_form.input :password_confirmation, required: true %>
+    </div>
+  <% end %>
+
+  <!-- Specific Client fields -->
+
+
+  <div class="actions">
+    <%= f.submit "Create Client" %>
+  </div>
+<% end %>
