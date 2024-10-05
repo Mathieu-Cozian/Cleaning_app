@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :apartments
-  resources :clients
   resources :cleaners
+  get 'clients/search', to: 'clients#search', defaults: { format: :json }
+  resources :clients
 
-  get 'client/search', to:  'clients#search', defaults: { format: :json }
 end
