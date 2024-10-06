@@ -19,6 +19,7 @@
           <p class="card-text">Price per cleaning: <%= apartment.price_per_cleaning %></p>
           <p class="card-text">Square meters: <%= apartment.sqm %></p>
           <p class="card-text">Number of rooms: <%= apartment.number_of_rooms %></p>
+          <p class="card-text">Owner : <%= "#{apartment.client.user.first_name} #{apartment.client.user.first_name}" %></p>
           <%= link_to "Show", apartment_path(apartment)%>
         </div>
       </div>

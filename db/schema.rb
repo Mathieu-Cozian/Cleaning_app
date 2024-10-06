@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_05_213152) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_06_000607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_213152) do
     t.integer "number_of_rooms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "client_id"
   end
 
   create_table "cleaners", force: :cascade do |t|
@@ -52,5 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_213152) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "apartments", "clients"
   add_foreign_key "clients", "users"
 end

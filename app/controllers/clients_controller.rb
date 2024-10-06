@@ -14,7 +14,6 @@ class ClientsController < ApplicationController
       redirect_to clients_path
     else
       render :new
-      alert("Something went wrong")
     end
   end
 

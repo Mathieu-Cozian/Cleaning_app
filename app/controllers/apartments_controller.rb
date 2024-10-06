@@ -13,14 +13,14 @@ class ApartmentsController < ApplicationController
       redirect_to apartments_path
     else
       render :new
-      alert("Something went wrong")
+      puts @apartment.errors.full_messages
     end
   end
 
   private
 
   def apartment_params
-    params.require(:apartment).permit(:title, :address, :address_url, :price_per_cleaning, :sqm, :number_of_rooms)
+    params.require(:apartment).permit( :address, :address_url, :price_per_cleaning, :sqm, :number_of_rooms, :client_id)
   end
 
 end

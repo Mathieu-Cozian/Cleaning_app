@@ -12,7 +12,7 @@ export default class extends Controller {
     // Add this log to check if the results target is recognized
     console.log(this.resultsTarget)
 
-    if (query.length > 1) {
+    if (query.length > 0) {
       fetch(`/clients/search?query=${query}`, { headers: { 'Accept': 'application/json' } })
           .then(response => {
             if (!response.ok) {
