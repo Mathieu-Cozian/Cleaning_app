@@ -11,6 +11,12 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
+      @client.user.is_client = true
+      if @client.user.save
+        flash[:notice] = "Client created successfully"
+      else
+        flash[:alert] = "Client created successfully, but user"
+      end
       redirect_to clients_path
     else
       render :new
@@ -36,7 +42,7 @@ class ClientsController < ApplicationController
 
 
   def client_params
-    params.require(:client).permit(:user_attributes => [:email, :password, :first_name, :last_name])
+    params.require(:client).permit(:user_attributes => [:email, :password, :password_confirmation, :first_name, :last_name])
   end
 
 end

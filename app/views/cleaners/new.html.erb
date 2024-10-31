@@ -1,17 +1,19 @@
-<h1>Create a New Client</h1>
+<h1>New Cleaner</h1>
 
-<%= simple_form_for(@client) do |f| %>
+<h1>Create a New Admin</h1>
+
+<%= simple_form_for(@cleaner) do |f| %>
 
   <!-- Nested User fields -->
   <%= f.simple_fields_for :user do |user_form| %>
 
     <div class="d-flex">
-        <div class="field">
-          <%= user_form.input :first_name, required: true %>
-        </div>
-        <div class="field">
-          <%= user_form.input :first_name, required: true %>
-        </div>
+      <div class="field">
+        <%= user_form.input :first_name, required: true %>
+      </div>
+      <div class="field">
+        <%= user_form.input :last_name, required: true %>
+      </div>
     </div>
     <div class="field">
       <%= user_form.input :email, required: true %>
@@ -24,10 +26,9 @@
     </div>
   <% end %>
 
-  <!-- Specific Client fields -->
-
+  <!-- Specific Admin fields -->
 
   <div class="actions">
-    <%= f.submit "Create Client" %>
+    <%= f.submit "Create cleaner" %>
   </div>
 <% end %>

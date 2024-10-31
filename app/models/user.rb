@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :cleaner, dependent: :destroy
   has_one :client, dependent: :destroy
+  has_one :admin, dependent: :destroy
 end

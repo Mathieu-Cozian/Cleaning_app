@@ -1,1 +1,8 @@
-<h1>test </h1>
+<h1>Clients Index </h1>
+<%= link_to "New Client", new_client_path %>
+
+<h1>All Clients</h1>
+<% @clients.each do |client| %>
+ <h2><%= client.user.first_name %> <%= client.user.last_name %></h2>
+  <p><%= client.user.email %></p>
+<% end %>

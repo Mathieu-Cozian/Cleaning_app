@@ -1,0 +1,10 @@
+<%= link_to "Create New Admin", new_admin_path %>
+<H1>All Admins</H1>
+
+<% @admins.each do |admin| %>
+  <div>
+    <h2>Nom : <%= admin.user.first_name %> <%= admin.user.last_name %></h2>
+    <p><%= admin.user.email %></p>
+    <p><%= admin.user.is_admin %></p>
+  </div>
+<% end %>

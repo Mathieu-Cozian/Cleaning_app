@@ -1,12 +1,24 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
+<H1>Clients</H1>
 <%Client.all.each do |client| %>
   <div class="mb-2">
-  <%= client.user.first_name %>
-  <%= client.user.last_name %>
-  <%= client.user.email %>
-
+    <%= client.user.first_name %>
+    <%= client.user.last_name %>
+    <%= client.user.email %>
+    <%= client.user.is_client %>
   </div>
 <% end %>
 
+
+<h1> Cleaners </h1>
+
+<%Cleaner.all.each do |cleaner| %>
+  <div class="mb-2">
+    <%= cleaner.user.first_name %>
+    <%= cleaner.user.last_name %>
+    <%= cleaner.user.email %>
+    <%= cleaner.user.is_cleaner %>
+  </div>
+<% end %>

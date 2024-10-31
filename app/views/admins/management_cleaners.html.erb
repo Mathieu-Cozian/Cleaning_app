@@ -1,0 +1,38 @@
+<h1>Cleaners Management</h1>
+
+<!-- Status Filter -->
+<div>
+  <label for="status-filter">Filter by Status:</label>
+  <select id="status-filter" data-controller="cleaners" data-action="change->cleaners#filterStatus">
+    <option value="">All</option>
+    <% @statuses.each do |status| %>
+      <option value="<%= status %>" <%= "selected" if params[:status] == status %>>
+        <%= status.capitalize %>
+      </option>
+    <% end %>
+  </select>
+</div>
+
+<!-- Cleaners Table in a Turbo Frame for dynamic updating -->
+<turbo-frame id="cleaners_table">
+  <table>
+    <thead>
+    <tr>
+      <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="first_name">First Name</a></th>
+      <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="last_name">Last Name</a></th>
+      <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="email">Email</a></th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @cleaners.each do |cleaner| %>
+      <tr>
+        <td><%= cleaner.user.first_name %></td>
+        <td><%= cleaner.user.last_name %></td>
+        <td><%= cleaner.user.email %></td>
+        <td><%= cleaner.status.capitalize %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</turbo-frame>

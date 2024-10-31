@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_06_000607) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_31_141819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_admins_on_user_id"
+  end
 
   create_table "apartments", force: :cascade do |t|
     t.string "address"
@@ -27,9 +34,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_06_000607) do
 
   create_table "cleaners", force: :cascade do |t|
     t.string "address"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_cleaners_on_user_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -49,10 +58,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_06_000607) do
     t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "first_name"
+    t.boolean "is_admin", default: false
+    t.boolean "is_client", default: false
+    t.boolean "is_cleaner", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admins", "users"
   add_foreign_key "apartments", "clients"
+  add_foreign_key "cleaners", "users"
   add_foreign_key "clients", "users"
 end

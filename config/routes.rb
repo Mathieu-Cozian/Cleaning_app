@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :cleaners
   get 'clients/search', to: 'clients#search', defaults: { format: :json }
   resources :clients
-
+  resources :admins
+  get 'admin/cleaners', to: 'admins#management_cleaners', as: 'admin_management_cleaners'
 end
