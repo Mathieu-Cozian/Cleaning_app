@@ -1,35 +1,48 @@
 // app/javascript/controllers/cleaners_controller.js
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static values = { sortColumn: String, sortDirection: String }
 
+  connect() {
+    this.sortDirectionValue = this.sortDirectionValue || "asc";
+  }
+
   // Action for filtering by status
   filterStatus(event) {
-    const status = event.target.value;
+    event.preventDefault();
+
+    const status = event.target.dataset.status;
+    console.log("Selected status:", status); // Debug: Log selected status
+
     const url = new URL(window.location.href);
     url.searchParams.set("status", status);
+    console.log("Updated URL:", url.toString()); // Debug: Log updated URL
 
-    // Update the URL directly to reflect the filter
-    window.location.href = url.toString();
+    Turbo.visit(url.toString(), { action: "replace", frame: "cleaners_table" });
   }
 
   // Action for sorting columns
   sort(event) {
     event.preventDefault();
-
     const column = event.target.dataset.sortColumn;
-    let direction = "asc";
-    if (this.sortColumnValue === column && this.sortDirectionValue === "asc") {
-      direction = "desc";
+    let direction = this.sortDirectionValue;
+    if (this.sortColumnValue === column) {
+      direction = direction === "asc" ? "desc" : "asc";
+    } else {
+      direction = "asc";
     }
-
-    // Update the URL for sorting
+    console.log("Initial direction is:", this.sortDirectionValue);
+    console.log("Direction after algo is:", direction);
     const url = new URL(window.location.href);
+    const currentStatus = url.searchParams.get("status");
     url.searchParams.set("sort", column);
     url.searchParams.set("direction", direction);
-
-    // Apply the sorting by changing the URL directly
-    window.location.href = url.toString();
+    if (currentStatus) {
+      url.searchParams.set("status", currentStatus); // Retain the status filter
+    }
+    Turbo.visit(url.toString(), { action: "replace", frame: "cleaners_table" });
+    this.sortColumnValue = column;
+    this.sortDirectionValue = direction;
   }
 }

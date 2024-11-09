@@ -1,0 +1,34 @@
+.filter-selection{
+    ul{
+      display: flex;
+      justify-content: space-evenly;
+      border: solid;
+      border-radius: 10px;
+      border-color: #0D6EFD;
+    }
+  li{
+    display: flex;
+    padding-right: 10px;
+  }
+}
+
+.remove-decorations{
+  ul{
+    list-style-type: none;
+  }
+  li {
+    text-decoration: none;
+    color: black;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+}
+.center-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  flex-direction: column;
+}
