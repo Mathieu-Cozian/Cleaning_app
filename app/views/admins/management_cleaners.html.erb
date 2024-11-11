@@ -14,15 +14,17 @@
         <% end %>
       </ul>
     </div>
-
     <!-- Cleaners Table in a Turbo Frame for dynamic updating -->
     <turbo-frame id="cleaners_table">
+      <div class="searchbar">
+        <input type="text", placeholder="Search Cleaner" data-action= "input->cleaners#search">
+      </div>
       <table>
         <thead>
         <tr class="remove-decorations">
-          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="first_name">First Name</a></th>
-          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="last_name">Last Name</a></th>
-          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-sort-column="email">Email</a></th>
+          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-controller-sort-direction-value="desc" data-sort-column="first_name">First Name</a></th>
+          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-controller-sort-direction-value="desc" data-sort-column="last_name">Last Name</a></th>
+          <th><a href="#" data-controller="cleaners" data-action="click->cleaners#sort" data-controller-sort-direction-value="desc" data-sort-column="email">Email</a></th>
           <th>Status</th>
         </tr>
         </thead>

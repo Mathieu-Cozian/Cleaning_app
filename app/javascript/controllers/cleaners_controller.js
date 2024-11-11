@@ -4,14 +4,10 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static values = { sortColumn: String, sortDirection: String }
 
-  connect() {
-    this.sortDirectionValue = this.sortDirectionValue || "asc";
-  }
 
   // Action for filtering by status
   filterStatus(event) {
     event.preventDefault();
-
     const status = event.target.dataset.status;
     console.log("Selected status:", status); // Debug: Log selected status
 
@@ -26,23 +22,21 @@ export default class extends Controller {
   sort(event) {
     event.preventDefault();
     const column = event.target.dataset.sortColumn;
-    let direction = this.sortDirectionValue;
-    if (this.sortColumnValue === column) {
-      direction = direction === "asc" ? "desc" : "asc";
-    } else {
-      direction = "asc";
-    }
-    console.log("Initial direction is:", this.sortDirectionValue);
-    console.log("Direction after algo is:", direction);
+    // Retrieve the persisted direction from localStorage, or default to "desc"
+    let direction = localStorage.getItem("sortDirection") || "desc";
+    // Toggle direction
+    direction = (direction === "desc") ? "asc" : "desc";
     const url = new URL(window.location.href);
     const currentStatus = url.searchParams.get("status");
     url.searchParams.set("sort", column);
     url.searchParams.set("direction", direction);
     if (currentStatus) {
-      url.searchParams.set("status", currentStatus); // Retain the status filter
+      url.searchParams.set("status", currentStatus);
     }
+
+    // Use Turbo to update the page
     Turbo.visit(url.toString(), { action: "replace", frame: "cleaners_table" });
-    this.sortColumnValue = column;
-    this.sortDirectionValue = direction;
+    // Persist the new direction in localStorage
+    localStorage.setItem("sortDirection", direction);
   }
 }
