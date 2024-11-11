@@ -1,0 +1,16 @@
+<!-- app/views/admins/cleaners/_filters.html.erb -->
+
+<div class="filter-selection remove-decorations">
+  <ul>
+    <li>
+      <a href="#" data-controller="cleaners" data-action="click->cleaners#filterStatus" data-status="" class="<%= 'active-status' unless params[:status].present? %>">All</a>
+    </li>
+    <% statuses.each do |status| %>
+      <li>
+        <a href="#" data-controller="cleaners" data-action="click->cleaners#filterStatus" data-status="<%= status %>" class="<%= 'active-status' if params[:status] == status %>">
+          <%= status.capitalize %> (<%= count_by_status[status] || 0 %>)
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</div>

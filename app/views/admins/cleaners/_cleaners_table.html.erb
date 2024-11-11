@@ -1,0 +1,21 @@
+<!-- app/views/admins/cleaners/_cleaners_table.html.erb -->
+<table>
+  <thead>
+  <tr class="remove-decorations">
+    <th><%= sortable_column("First Name", "first_name", "cleaners") %></th>
+    <th><%= sortable_column("Last Name", "last_name", "cleaners") %></th>
+    <th><%= sortable_column("Email", "email", "cleaners") %></th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% cleaners.each do |cleaner| %>
+    <tr>
+      <td><%= cleaner.user.first_name %></td>
+      <td><%= cleaner.user.last_name %></td>
+      <td><%= cleaner.user.email %></td>
+      <td><%= cleaner.status.capitalize %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

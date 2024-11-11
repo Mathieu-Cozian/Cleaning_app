@@ -1,0 +1,19 @@
+<!-- app/views/admins/cleaners/index.html.erb -->
+
+<h1>Cleaners Management</h1>
+<%= link_to "New Cleaner", new_cleaner_path %>
+
+<div class="container center-content">
+  <!-- Status Filter -->
+  <%= render 'admins/cleaners/filters', statuses: @statuses, count_by_status: @count_by_status %>
+
+  <!-- Search Bar -->
+  <div class="searchbar" data-controller="cleaners">
+    <input type="text" placeholder="Search Cleaner" data-action="input->cleaners#search">
+  </div>
+
+  <!-- Turbo Frame for Cleaners Table -->
+  <turbo-frame id="cleaners_table">
+    <%= render 'admins/cleaners/cleaners_table', cleaners: @cleaners %>
+  </turbo-frame>
+</div>

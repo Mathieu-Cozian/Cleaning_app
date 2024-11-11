@@ -39,4 +39,32 @@ export default class extends Controller {
     // Persist the new direction in localStorage
     localStorage.setItem("sortDirection", direction);
   }
+  search(event) {
+    const searchTerm = event.target.value.trim();
+    const url = new URL(window.location.href);
+
+    // Set search parameter in URL
+    url.searchParams.set("search", searchTerm);
+
+    // Retain sorting and status filters if present
+    const currentStatus = url.searchParams.get("status");
+    const sortColumn = url.searchParams.get("sort");
+    const sortDirection = url.searchParams.get("direction");
+
+    if (currentStatus) url.searchParams.set("status", currentStatus);
+    if (sortColumn) url.searchParams.set("sort", sortColumn);
+    if (sortDirection) url.searchParams.set("direction", sortDirection);
+
+    // Fetch updated content and replace only the table content
+    fetch(url.toString(), {
+      headers: { "Accept": "text/vnd.turbo-stream.html" }
+    })
+        .then(response => response.text())
+        .then(html => {
+          const frame = document.getElementById("cleaners_table");
+          frame.innerHTML = html; // Replace the content in the frame with new HTML
+        })
+        .catch(error => console.error("Error fetching search results:", error));
+  }
 }
+
